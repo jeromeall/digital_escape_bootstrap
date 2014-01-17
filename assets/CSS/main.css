@@ -1,0 +1,459 @@
+p {
+  font-size: 1.1em;
+}
+
+#brand {
+  color: #fff;
+  }
+
+.white, .white a, #register {
+  color: #fff;
+  padding-left: 12px;
+  padding-right: 12px;
+  vertical-align: middle;
+}
+
+.white:hover, .white a:hover {
+  color: #8e44ad;
+}
+
+#register {
+  position: relative;
+  top: 2px;
+  left: 12px;
+}
+
+.popover {
+  background: black;
+  border: black;
+  color: white;
+}
+
+.arrow {
+  opacity: 0;
+}
+
+
+.btn:hover {
+  opacity: .8 !important;
+}
+
+.glow {
+  -webkit-animation-name: greenPulse;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: reverse;
+  -webkit-animation-timing-function: ease-in-out;
+
+  animation-name: greenPulse;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-direction: reverse;
+  animation-timing-function: ease-in-out;
+}
+
+  /* Carousel base class */
+.carousel {
+  margin-bottom: 60px;
+
+  /* Negative margin to pull up carousel. */
+  margin-top: -50px;
+}
+
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel .item {
+  height: 500px;
+  background-color: #777;
+}
+
+.carousel-inner > .item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 500px;
+}
+
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+.img-marketing {
+  width: 290px;
+  height: 290px;
+}
+
+
+/* Pad the edges of the mobile views a bit */
+.marketing {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.marketing h2 {
+  font-weight: normal;
+}
+
+.marketing .col-lg-4 p {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+.btn-marketing {
+  color: white;
+  background: black;
+}
+
+.btn-marketing:hover {
+  opacity: .8;
+  color: #8e44ad;
+}
+
+/*Animation */
+
+/* @-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotateY(0deg);
+  }
+  to { 
+    -webkit-transform: rotateY(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+*/
+
+/*
+.animateSpin {
+    -webkit-animation-name: spin; 
+    -webkit-animation-duration: 14.0s; 
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-delay: 1s;
+
+    animation-name: spin;
+    animation-duration: 14.0s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+
+}
+/*
+
+
+/* Featurette section */
+
+.featurette-heading {
+ margin-top: 20px;
+}
+
+#charu {
+  margin: 20px auto;
+}
+
+#schedule{
+  display: inline;
+  padding-right: 20px;
+  vertical-align: middle;
+}
+
+.day {
+  margin: 0 auto;
+  width: 200px;
+  background: black;
+  color: white;
+
+}
+
+.day:hover {
+  opacity: .8;
+  color: #8e44ad;
+}
+
+.location {
+  margin-top: 24px;
+}
+
+#fb-thumb {
+  width: 200px;
+  display: inline-block !important;
+  position: relative;
+  top: -140px;
+  opacity: .4;
+  z-index: -1;
+}
+
+#fb-thumb-container {
+  height: 75px;
+}
+
+#fb-feature {
+  overflow: hidden;
+}
+
+
+
+footer {
+  background: black;
+  color: white;
+  width: 100%;
+  height: 150px;
+  padding-top: 20px;
+}
+
+
+/* Modal */
+
+.modal-header {
+  background: black;
+}
+
+.modal-title {
+  color: white;
+}
+
+.modal-body {
+  line-height: 2;
+  font-size: 1.5em;
+}
+
+.close {
+  font-size: 1.6em;
+  color: red !important;
+  border-color: red !important;
+  opacity: 1;
+  text-shadow: 0 1px 0 red;
+}
+
+.close:hover {
+  color: #95a5a6;
+}
+
+.submit {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.thumbnail {
+  text-align: center;
+  background: #95a5a6;
+}
+
+.thumbnail img {
+  padding: 12px 0 0 0;
+  height: 180px;
+}
+
+.caption {
+  margin: 2px;
+  padding: 2px;
+}
+
+.caption h3 {
+  margin: 2px;
+  padding: 2px;
+  color: white;
+}
+
+.caption p {
+  color: white;
+}
+
+.chevron-modal {
+  color: green;
+  position: relative;
+  top: -18px;
+}
+
+.chevron-modal:hover {
+  color: #95a5a6;
+}
+
+#pay {
+  width: 100%;
+  height: 565px;
+}
+
+#register-width {
+  width: 95%;
+  height: 565px;
+}
+
+/* Gmap styling */
+
+
+.mapBtn {
+  margin-top: -6px;
+}
+
+#mode {
+  margin-top: 9px;
+}
+
+#map_canvas {
+  width: 100%;
+  height: 500px;
+  margin-top: 60px;
+}
+
+#autoPosition, #startBtn {
+  margin-top: 9px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#autoPosition {
+  background: black;
+}
+
+
+#directionsPanel {
+  width: 100%;
+  max-height: 400px;
+  overflow: scroll;
+  }
+
+/* Fbook styling */
+.centered{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#fb-container{
+  margin-top: 20px;
+  width: 50%;
+  height: auto;
+  padding-top: 9px;
+  border-radius: 12px;
+
+  -webkit-animation-name: greenPulse;
+  -webkit-animation-duration: 4s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: reverse;
+  -webkit-animation-timing-function: ease-in-out;
+
+  animation-name: greenPulse;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-direction: reverse;
+  animation-timing-function: ease-in-out;
+
+}
+
+@-webkit-keyframes greenPulse {
+  from { background-color: #5AB55A; -webkit-box-shadow: 0 0 12px #333; }
+  50% { background-color: #519A51; -webkit-box-shadow: 0 0 21px #91bd09; }
+  to { background-color: #5AB55A; -webkit-box-shadow: 0 0 12px #333; }
+}
+
+@keyframes greenPulse {
+  from { background-color: #5AB55A; -webkit-box-shadow: 0 0 12px #333; }
+  50% { background-color: #519A51; -webkit-box-shadow: 0 0 21px #91bd09; }
+  to { background-color: #5AB55A; -webkit-box-shadow: 0 0 12px #333; }
+}
+
+/* Custom responsive CSS */
+
+@media (max-width: 400px){
+  #register {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 18px;
+  }
+
+}
+
+
+ @media (max-width: 600px) {
+    .popover {
+    display:none !important;
+  }
+
+  #map_canvas {
+    display:none !important;
+  }
+}
+
+
+@media (max-width: 1000px){
+  .day {
+    display: block;
+    margin: 2% auto;
+    width: 280px;
+  }
+
+  #schedule {
+    display: block;
+    margin: 2% auto;
+    padding: 12px;
+    text-align: center;
+  }
+
+}
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 750px) {
+
+  /* Remove the edge padding needed for mobile */
+  .marketing {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .lead {
+    margin-bottom: 20px;
+  }
+
+  /* Navbar positioning foo */
+  .navbar-wrapper {
+    margin-top: 2px;
+  }
+  /* The navbar becomes detached from the top, so we round the corners */
+  .navbar-wrapper .navbar {
+    border-radius: 4px;
+  }
+
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+
+}
+
+@media (min-width: 900px) {
+  .featurette-heading {
+    margin-top: 20px;
+  }
+
+  .lead {
+    margin-bottom: 20px;
+  }
+}

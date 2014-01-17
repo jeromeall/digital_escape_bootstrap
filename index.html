@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Digital ^Escape | Technology-Free Retreats</title>
+
+<link rel="canonical" href="http://digitalescape.kissr.com"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, user-scalable=no"/>
+
+<!-- Opengraph tags -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Digital Escape"/>
+<meta property="og:title" content="Digital Escape | Technology Free Retreats"/>
+<meta property="og:url" content="http://digitalescape.kissr.com"/>
+<meta property="og:type" content="organization"/>
+<meta property="og:description" content="Technology free weekends in upstate NY with gentle yoga to disconnect and reconnect!"/>
+<meta property="og:image" content="assets/img/cityFB.jpg"/>
+
+
+
+<!-- Microdata; needs to be completed -->
+<meta itemscope itemtype ="http://schema.org/Organization"/>
+<meta itemprop="name" content="Digital Escape, Technology-free retreats"/>
+<meta itemprop="url" content="http://digitalescape.kissr.com"/>
+<meta itemprop="description" content="Technology free weekends in upstate NY with gentle yoga to disconnect and reconnect!" />
+<meta itemprop="image" content="assets/img/cityFB.jpg"/>
+<meta itemprop="founder" content="Yogi Charu"/>
+
+<!--Standard meta tags -->
+<meta name="description" content="Digital ^Escape offers technology-free weekends in upstate New York with gentle yoga to help you disconnect digitally and reconnect with life!" />
+<meta name="keywords" content="yoga retreat, upstate New York, New York City, no technology, weekend, getaway, meditation, Savi Yoga, Yogi Charu, Katie Bakas, Brad Crispin"/>
+
+<!--Links-->
+<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="assets/css/main.css">
+
+<!--Script CDNs-->
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=weather"></script>
+
+<!--Google Analytics-->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-45430721-1', 'kissr.com');
+  ga('send', 'pageview');
+</script>
+
+<!--Google MAPS API-->
+<script type="text/javascript">
+ var directionDisplay;
+ var directionsService = new google.maps.DirectionsService();
+ var map;
+
+ function initialize() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  var ffzlaw = new google.maps.LatLng(41.2461529,-73.5895386);
+  var myOptions = {
+    zoom:11,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    scrollwheel: false,
+    center: ffzlaw,
+  }
+
+  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+  var weatherLayer = new google.maps.weather.WeatherLayer({
+    temperatureUnits: google.maps.weather.TemperatureUnit.FAHRENHEIT
+  });
+  weatherLayer.setMap(map);
+
+  var cloudLayer = new google.maps.weather.CloudLayer();
+  cloudLayer.setMap(map);
+
+
+  // var transitLayer = new google.maps.TransitLayer();
+  // transitLayer.setMap(map);
+
+  // var trafficLayer = new google.maps.TrafficLayer();
+  // trafficLayer.setMap(map);
+
+  directionsDisplay.setMap(map);
+  directionsDisplay.setPanel(document.getElementById("directionsPanel"));
+  }
+
+  function calcRoute() {
+    var start = document.getElementById("start").value;
+    var end = "Ward Pound Ridge Reservation New York";
+    //var selectedMode = document.getElementById("mode").value;
+    var request = {
+      origin:start,
+      destination:end,
+      travelMode: google.maps.DirectionsTravelMode.DRIVING
+      // travelMode: google.maps.DirectionsTravelMode[selectedMode]
+  };
+
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+// Try HTML5 geolocation
+
+function autoDetect() {
+  if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = new google.maps.LatLng(position.coords.latitude,
+                                       position.coords.longitude);
+
+      var infowindow = new google.maps.InfoWindow({
+        map: map,
+        position: pos,
+        content: 'You are here!'
+      });
+
+      map.setCenter(pos);
+
+      $('#start').val(pos);
+      calcRoute();
+      $('#start').val("");
+
+
+    }, function() {
+      handleNoGeolocation(true);
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleNoGeolocation(false);
+  }
+
+}
+
+function handleNoGeolocation(errorFlag) {
+  if (errorFlag) {
+    var content = 'Error: The Geolocation service failed.';
+  } else {
+    var content = 'Error: Your browser doesn\'t support geolocation.';
+  }
+}
+
+</script> 
+
+<!--Enter key in map input field triggers calcRoute()-->
+<script>
+$(document).ready(function() {
+  $('#start').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      calcRoute();
+    }
+  });
+});
+</script>
+
+<!--Initialize popovers on hover-->
+<script>
+  $(document).ready(function(){
+    $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'bottom'});
+  });
+</script>
+
+<!--Smooth scroll-->
+<script>
+$(function() {
+  $('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+</script>
+
+
+</head>
+
+<body onload="initialize()">
+
+<!--FB SDK integration-->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+<!--Navbar-->
+ <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a id ="brand" class="navbar-brand" href="#">Digital ^<sup>escape</sup></a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+           
+          <!-- the form classes navbar-form and navbar-right will vertically center the button -->
+          <form class="navbar-form navbar-right">
+            <a href="#intro"><span class="glyphicon glyphicon-info-sign white" data-toggle="popover" data-content="Introduction" id="infoPop"></span></a>
+            <a href="#location"><span class="glyphicon glyphicon-home white" data-toggle="popover" data-content="Location"></span></a>
+            <a href="#dailySchedule"><span class="glyphicon glyphicon-list white" data-toggle="popover" data-content="Schedule" id="calendarPop"></span></a>
+            <a href="#teacher"><span class="glyphicon glyphicon-user white" data-toggle="popover" data-content="Teacher" id="userPop"></span></a>
+            <a href="#FAQ"><span class="glyphicon glyphicon-question-sign white" data-toggle="popover" data-content="FAQ" id="questionPop"></span></a>
+            <a href="#social"><span class="glyphicon glyphicon-thumbs-up white" data-toggle="popover" data-content="Like us on Facebook!" id="thumbsPop"></span></a>
+            <a href="#GPS"><span class="glyphicon glyphicon-road white" data-toggle="popover" data-content="Directions" id="mapPop"></span></a>
+            <a href="//www.facebook.com/digital.escape.weekend/" target="_blank"><span class="glyphicon glyphicon-picture white" data-toggle="popover" data-content="Facebook photos" id="mapPop"></span></a>
+            <a href="https://www.facebook.com/digital.escape.weekend/app_100265896690345"><button type="button" class="btn btn-sm btn-success glow" id="register">Register</button></a>
+          </form>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+<!-- Carousel -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="assets/img/city.jpg" alt="Thoughts always online?">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Is your mind stuck online?</h1>
+              <p>Surrender your iPhone... <br>Take a break from the city... <br> And join a Digital ^<sup>escape</sup> weekend!</p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="assets/img/stream.jpg" alt="Second slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Nature calms the mind.</h1>
+              <p>Refocus on yourself <br>Disconnect from anxiety <br>Re-engage with the world</p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="assets/img/country.jpg" alt="Third slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Make this weekend a new beginning.</h1>
+              <p>Every day is a new chance to be happy<br>Take advantage</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+<a name="intro"></a>
+    </div><!-- /.carousel -->
+
+
+    <div class="container marketing">
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="col-lg-4">
+          <img class="img-circle img-marketing animateSpin" src="assets/img/butterfly.jpg">
+          <h2>Get outside</h2>
+          <p>Three days in upstate New York without a cellphone or computer would do you good.</p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <img class="img-circle img-marketing animateSpin" src="assets/img/flower.jpg">
+          <h2>Smell the roses</h2>
+          <p>Study the practice of relaxation and engage with the serenity in your surroundings.</p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <img class="img-circle img-marketing animateSpin" src="assets/img/river.jpg">
+          <h2>Breathe</h2>
+          <p>Practice gentle yoga and meditation with Yogi Charu.</p>
+        </div><!-- /.col-lg-4 -->
+<a name="location"></a>
+      </div><!-- /.row -->
+
+
+<!-- Featurettes -->
+
+ <hr class="featurette-divider">
+
+    <div class="row featurette">
+
+      
+        <div class="col-md-5">
+          <div class="container">
+          <img class="featurette-image img-responsive location" src="assets/img/bee.jpg" alt="">
+          </div>
+        </div>
+
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Join us in <span class="text-muted">Katonah, New York</span></h2>
+          <p class="lead">Unwind in magnificent upstate New York! </p>
+          <p class="lead">Situated next to the Ward Pound Ridge Reservation, Digital ^<sup>escape</sup> gives you the chance to decompress and re-energize in a stunning environment.</p>
+          <p class="lead">Over 100 hikeable miles of trail surround the campus, set against the gorgeous backdrop and popular swimming destination, the Cross River Resevoir.</p>
+          <p class="lead">Modern amenities and comfortable rooms make for the perfect getaway!</p>
+        </div>
+<a name="dailySchedule"></a>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="container">
+        <h1 id="schedule"><span class="text-muted">Daily Schedule</span></h1>
+        <button type="button" class="btn btn-lg day" data-toggle="modal" data-target="#fridayModal" id="friday">Friday </button>
+        <button type="button" class="btn btn-lg day" data-toggle="modal" data-target="#saturdayModal" id="saturday" >Saturday</button>
+        <button type="button" class="btn btn-lg day" data-toggle="modal" data-target="#sundayModal" id="sunday">Sunday</button>  
+        </div>
+<a name="teacher"></a>       
+      </div>
+
+      <hr class="featurette-divider">
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Relax with a yoga master. <span class="text-muted">Learn the art of mindfulness.</span></h2>
+          <p class="lead">Yogi Charu has studied and taught relaxation and mindfulness his entire adult life. His yoga journey began at 16 in his native Belize. Leaving home shortly thereafter, he spent most of his early career in India training in traditional Himalayan ashrams. He is an inducted disciple of the Saraswati lineage of Hatha yoga, one of the ten classical monk orders in India founded in the 8th century. Today, Yogi Charu is the master teacher of <a href="//saviyoga.com">Savi Yoga</a> in New York City, teaching public classes at <a href="//bhakticenter.org/">The Bhakti Center</a> and at <a href="//pureyoga.com">Pure Yoga</a>, where he is the co-head of instructor training. Pure Yoga has been voted "Best Yoga" by New York Magazine in 2009 and 2010 and is one of New York City's leading studios. </p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" id ="charu" src="assets/img/yogi-charu_280x400.jpg" alt="Yogi Charu">
+        </div>
+      </div>
+<!--
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="container">
+          <h2 class="featurette-heading" style="text-align: center; margin-bottom: 20px;">Meet the <span class="text-muted">Digital ^<sup>escape</sup></span> team!</h2>
+        </div>
+
+        <div class="col-md-4"> 
+           <div class="thumbnail">
+            <img  class="img-circle" src="http://m3.c.lnkd.licdn.com/media/p/6/000/1cd/23f/1002676.jpg" alt="Katie Bakas">
+              <div class="caption">
+              <h3>Katie Bakas</h3>
+              <p>Teacher (RYT) / site lead</p>
+              <p><a href="http://www.linkedin.com/pub/katie-bakas/40/135/509" target="_blank" class="btn btn-marketing" role="button"><span class="glyphicon glyphicon-search"></span></a></p>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+
+          <div class="thumbnail">
+            <img class="img-circle" src="assets/img/brad.jpg" alt="Brad Crispin">
+              <div class="caption">
+              <h3>Brad Crispin</h3>
+              <p>Teacher (RYT) / web developer / marketing lead</p>
+              <p><a href="http://www.linkedin.com/pub/brad-crispin/4/82b/b13/" target="_blank" class="btn btn-marketing" role="button"><span class="glyphicon glyphicon-search"></span></a></p>
+              </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+           <div class="thumbnail">
+            <img class="img-circle" src="http://m3.c.lnkd.licdn.com/mpr/mpr/shrink_200_200/p/3/000/0e0/131/376be95.jpg" alt="Brittany Butcher">
+              <div class="caption">
+              <h3>Brittany Butcher</h3>
+              <p>Teacher (RYT)</p>
+              <p><a href="http://www.linkedin.com/pub/brittany-butcher/4/961/72b/" target="_blank"class="btn btn-marketing" role="button"><span class="glyphicon glyphicon-search"></span></a> </p>
+              </div>
+            </div>  
+        </div>
+  
+      </div>
+-->
+      <a name="FAQ"></a> 
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        
+        <div class="col-md-5">
+          <h2 class="featurette-heading">Frequently Asked <span class="text-muted">Questions</span></h2>
+        </div>
+
+        <div class="col-md-7">
+          <h3>Do I need a yoga background? </h3>
+          <p class="lead">Digital ^<sup>escape</sup> is for everyone! We are going to disconnect from the daily tension that can snowball into chronic stress. We will be outside a lot and eating healthy. Check out the daily schedule! The yoga itself is chill, and the meditation is passive. We are going to show you awesome ways to relax!</p><br>
+          <h3>Really, no phones or computers? What about emergencies? </h3>
+          <p class="lead"> Family or coworkers can use our staff number for emergencies 24/7, but otherwise we will ask you to put up an auto-reply <span class="text-muted"><strong> "I am taking a Digital ^<sup>escape</sup> this weekend, so it will have to wait until Sunday evening!"</strong></span> A weekend off technology feels great!</p><br/>
+          <h3>When will the first retreat be held? </h3>
+          <p class="lead">We are soft-launching now while we wait for warmer weather! We are scheduling our first weekend for March 2014. Like us with Facebook below and you will be sure to get our save the date!</p><br/>
+          <h3>What is Yoga Nidra? </h3>
+          <p class="lead">Yoga Nidra is the yogic art of relaxation. Lying down, the teacher will guide you through a simple series of thoughts that leaves you feeling incredibly refreshed. If you want to try Yoga Nidra you can <a href="http://saviyoga.com/store/yoga-nidra">buy a digital download</a> on our sister site, Savi Yoga. Over the course of the weekend, you will learn to do it on your own. It is a great way to relax and the perfect introduction to meditation if you have ever been curious!</p> <br/>
+          <h3>6 AM on a Saturday?! Will there be coffee?</h3>
+          <p class="lead">There will be coffee! Waking up early sounds terrible, for sure, but think about it for a moment. How do you feel if you wake up late? Everything we do this weekend is about showing you how beautiful you can feel! </p> <br/>
+          <h3>Do you contribute profits to charity?</h3>
+          <p class="lead"> Yes! (This is a yoga company). We intend to donate a material percentage of profits and we expect to announce a formal charity policy following our first retreat.</p> <br/>
+          <h3>How do I get involved?</h3>
+          <p class="lead"> We have been getting a number of requests to get involved and we could not be more excited! We will be unrolling a Digital ^<sup>escape</sup> partners program with our launch this Spring. Please contact us via our <a href="http://www.facebook.com/digital.escape.weekend">Facebook page</a> if you have questions!</p> <br/>
+          <h3>I can't wait until Spring to escape! What can I do?</h3>
+          <p class="lead"> Every member of our team is a Yoga Alliance certified meditation instructor from a first-class yoga school. For more background, check out <a href="http://saviyoga.com">Savi Yoga</a> and <a href="http://wwww.pureyoga.com">Pure Yoga</a>, among other leading yoga schools where our teachers were certified. So if you can't wait until Spring and are interested in getting started with meditation like Yoga Nidra, send us a note on our <a href="http://www.facebook.com/digital.escape.weekend">Facebook page</a> and we may be able to match you up with a great teacher near you!</p> 
+        </div>
+
+      
+
+      </div>
+      <a name="social"></a>
+      <hr class="featurette-divider">
+
+       <div class="row featurette" id="fb-feature">
+
+      <h2 class="featurette-heading centered" id="fb-header">Support us<span class="text-muted"> on Facebook!</span></h2>
+      <div class="container centered glow" id="fb-container">
+      <div class="fb-like" data-href="https://www.facebook.com/digital.escape.weekend" data-colorscheme="light" data-layout="standard" data-action="like" data-show-faces="true" data-send="false" data-width="500px" data-max-rows="3"></div>
+      </div>
+      <div class="container centered" id="fb-thumb-container">
+        <img src="assets/img/largethumb.png" id="fb-thumb" class="img img-responsive">
+      </div>
+  </div>
+    <hr class="featurette-divider">
+
+      <div class="row featurette" id="directions">
+
+        <div class="col-md-6">
+          <h2 class="featurette-heading">How to <span class="text-muted">get there</span></h2>
+          <form>
+            <input type="text" class="form-control" id="start" placeholder="Starting location - e.g. 'New York City'"/>
+          </form>
+             <!-- <select class="form-control" id="mode" onchange="calcRoute()">
+                <option value="DRIVING">Driving</option>
+                <option value="WALKING">Walking</option>
+                <option value="BICYCLING">Bicycling</option>
+                <option value="TRANSIT">Transit</option>
+              </select> -->
+              <button class="btn" id="autoPosition" onclick="autoDetect();"><span class="glyphicon glyphicon-play white mapBtn"></span></button>
+              <input type="submit" class="btn btn-success" id="startBtn" value="Submit" onclick="calcRoute();"/>
+
+            <div id="directionsPanel">
+          </div>          
+        </div>
+
+        <div class="col-md-6">
+          <div id="map_canvas">
+            </div>
+        </div>
+<a name="GPS"></a>      
+      </div>
+
+      <hr class="featurette-divider">
+
+
+ 
+
+<!-- Scaffolding for additional featurettes 
+
+   <div class="row featurette">
+      <a name=""></a>
+      <div class="col-md-5">
+          <img class="featurette-image img-responsive" id ="" src="assets/img/#" alt="">
+        </div>
+        <div class="col-md-7">
+          <h2 class="featurette-heading">A. <span class="text-muted">B.</span></h2>
+          <p class="lead">A </p>
+        </div>
+        
+      </div>
+
+      <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <a name=""></a>
+      <div class="col-md-7">
+          <h2 class="featurette-heading">A. <span class="text-muted">B.</span></h2>
+          <p class="lead">A </p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" id ="" src="assets/img/#" alt="">
+        </div>
+      </div>
+      
+      <hr class="featurette-divider">
+
+    -->
+
+      <!-- /END THE FEATURETTES -->
+    </div><!-- /.container -->
+
+ <!-- FOOTER -->
+
+      <footer>
+        <div class="container" style="margin-bottom:-10px;">
+        <p>2013 Digital ^<sup>escape</sup></p>
+        <br/>
+        <a href="//http://www.linkedin.com/pub/brad-crispin/4/82b/b13" style="color:lightblue; text-deocration:none;"><p>Web development: Brad Crispin</a></p>
+        <a href="//steepravine.com" style="color:lightblue; text-deocration:none;"><p>Photography: Cam Fortin @ Steep Ravine</a></p>
+        </div>
+      </footer>
+
+
+<!-- Modals -->
+<!--
+<div class="modal fade" id="registerModal">
+  <div class="modal-dialog" id="register-width">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <span class="glyphicon glyphicon-lock" style="vertical-align: center; color:#f1c40f;"></span><h3 class="modal-title"  style="display:inline;">  Sign up for early-bird registration emails @ Facebook!</h3>
+     </div>
+      <div class="modal-body">
+        <iframe id="pay" src="https://www.facebook.com/digital.escape.weekend" seamless="seamless" scrolling="yes"></iframe>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- <div class="modal fade" id="registerModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <span class="glyphicon glyphicon-lock" style="vertical-align: center; color:#f1c40f;"></span><h3 class="modal-title"  style="display:inline;">  Redirect to secure payment @ Savi Yoga</h3>
+     </div>
+      <div class="modal-body">
+        <img src="assets/img/saviyoga.jpg" class="img-responsive" id="modalImg">
+          <a href="//saviyoga.com/register/digital-escape-weekend" class="btn btn-lg btn-success" style="width:100%; margin-top:2%;">Register</a>
+      </div>
+      </div>
+    </div>
+  </div><
+</div> --> <!-- /.modal -->
+
+<div class="modal fade" id="fridayModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title">Friday schedule</h3>
+     </div>
+      <div class="modal-body">
+        <p>6:00pm  <strong>Arrival</strong></p>
+        <p>6:30pm  <strong>Lecture on Digital ^<sup>escape</sup> Weekend</strong></p>
+        <p>7:00pm  <strong>Yoga Nidra (Art of Relaxation)</strong></p>
+        <p>7:30pm  <strong>Dinner</strong></p> 
+        <p>8:30pm  <strong>Group</strong></p>
+        <p>9:30pm  <strong>Sleep</strong></p>
+        <span class="glyphicon glyphicon-chevron-right pull-right chevron-modal" data-toggle="modal" data-target="#saturdayModal" onclick="$('#fridayModal').modal('hide');"></span>
+      </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="saturdayModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title">Saturday schedule</h3>
+      </div>
+      <div class="modal-body">
+        <p>6:00am 	<strong>Morning Meditation</strong></p> 
+        <p>7:00am 	<strong>Breakfast (yes, there will be coffee)</strong></p>
+        <p>8:30am 	<strong>Yoga Nidra (Art of Relaxation)</strong></p>
+        <p>9:30am 	<strong>Break + Hike + Swim</strong></p> 
+        <p>12:00n 	<strong>Group</strong></p>
+        <p>2:00pm 	<strong>Lunch</strong></p>
+        <p>3:00pm 	<strong>Rest</strong></p>
+        <p>4:00pm 	<strong>Reading Discussion</strong></p>
+        <p>5:30pm 	<strong>Yoga and Yoga Nidra</strong></p>
+        <p>7:30pm 	<strong>Dinner</strong></p>
+        <p>8:30pm 	<strong>Group</strong></p>
+        <p>9:30pm 	<strong>Sleep</strong></p>
+        <span class="glyphicon glyphicon-chevron-left pull-left chevron-modal" data-toggle="modal" data-target="#fridayModal" onclick="$('#saturdayModal').modal('hide');"></span>
+        <span class="glyphicon glyphicon-chevron-right pull-right chevron-modal" data-toggle="modal" data-target="#sundayModal" onclick="$('#saturdayModal').modal('hide');"></span>
+      </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="sundayModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title">Sunday schedule</h3>
+      </div>
+      <div class="modal-body">
+        <p>6:00am		<strong>Morning Meditation</strong></p>
+        <p>7:00am		<strong>Yoga and Yoga Nidra</strong></p>
+        <p>9:00am		<strong>Breakfast</strong></p>
+        <p>9:30am		<strong>Hike + Swim + Group</strong></p>
+        <p>12:00n		<strong>Conclusive Lecture</strong></p>
+        <p>2:00pm		<strong>Lunch</strong></p>
+        <p>3:00pm		<strong>Final Yoga Nidra (Complete Relaxation)</strong></p>
+        <p>4:30pm		<strong>Farewell</strong></p>
+        <span class="glyphicon glyphicon-chevron-left pull-left chevron-modal" data-toggle="modal" data-target="#saturdayModal" onclick="$('#sundayModal').modal('hide');"></span>
+      </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- disabled pending incorporation of back-end
+<div class="modal fade" id="questionModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title">Ask a question</h3>
+      </div>
+      <div class="modal-body">
+       
+       <div class="container">
+        <form>
+          <input type="email" placeholder="youremail@gmail.com"></input>
+          <input type="textarea" placeholder="How much fun am I going to have?"></input>
+          <input type="submit" class="btn btn-lg btn-success submit" data-dismiss="modal" aria-hidden="true"></input>
+        </form>
+      </div>
+
+      </div>
+      </div>
+    </div><
+  </div>
+</div>
+-->
+
+</body>
+</html>
